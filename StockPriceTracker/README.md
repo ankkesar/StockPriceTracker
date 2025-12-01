@@ -17,16 +17,14 @@ The application follows Clean Architecture with three main layers:
 - Decouples static data from websocket price payload, to reduce network overhead
 - **Application**:
 - Uses manual DI, will use HILT for prod app
-- I am aware of API Design that could make fetchPrice ws configurable for stock list, 
-- to use at multiple places, but scope was fixed to 25 stocks
+- I am aware of API Design that could make fetchPrice ws configurable for stock list, to use at multiple places, but scope was fixed to 25 stocks
 - App auto recovers from connectivity drops with retry backoff, it can be configurable on device/server load
 - With Mock API server/connectivity error is passed as it is to UI, it will be handled by actual wss
 
 ## Performance optimisation(To be implemented)
 - We can pull large data from backend, as per available Network type.
 - This data can be buffered with Stateflow and consumed as per device speed
-- Converting a cold flow into hot flow can share dataset, 
-- if UI is recreated
+- Converting a cold flow into hot flow can share dataset, if UI is recreated
 - Using conflate to prevent ui jank
 
 ## Project Structure
@@ -102,15 +100,14 @@ Repository interface defining operations for stock price data.
 Data Transfer Object for stock price data from the service.
 - `id`: Stock identifier
 - `symbol`: Stock symbol
-- `price`: Current price (mutable), since I am using initial value set. 
-- It will be immutable with actual wss
+- `price`: Current price (mutable), since I am using initial value set. It will be immutable with actual wss
 - `change`: Price change
 - `updatedAt`: Update timestamp
 - `toJson()`: Converts to JSON string
 
 #### `StockPriceService` (interface)
 Interface for stock price streaming service.
-Ensures maintainability, can be migrated a diff impl like grpc in future
+Ensures maintainability, can be migrated a different impl like grpc in future
 - `getStockPriceStream()`: Flow of stock price DTOs
 - `startStockService()`: Start the service
 - `stopStockPriceService()`: Stop the service
@@ -118,8 +115,7 @@ Ensures maintainability, can be migrated a diff impl like grpc in future
 
 #### `WebSocketStockPriceService` (class)
 WebSocket implementation of StockPriceService.
-This service is designed to be performance efficient, with controlled ping rate, 
-as per market status
+This service is designed to be performance efficient, with controlled ping rate, as per market status, which can be fetched dynamically and init wss
 - Connects to `wss://ws.postman-echo.com/raw`
 - Generates mock price updates every 2 seconds
 - Handles reconnection logic
@@ -178,8 +174,7 @@ UI state container.
 Main Compose screen displaying stock prices.
 - Shows connection status banner
 - Displays scrollable list of stocks
-- [Bonus] Displays price changes with color indicators - price is green for increase
-- and red for decrease
+- [Bonus] Displays price changes with color indicators - price is green for increase and red for decrease
 
 #### `StockPriceRoute` (Composable)
 Route composable that sets up ViewModel and screen.
