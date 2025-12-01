@@ -32,9 +32,6 @@ import java.net.SocketException
 import java.net.UnknownHostException
 import kotlin.math.pow
 
-private const val MAX_RETRIES = 5
-private const val RETRIES_BACKOFF = 1.1F
-
 internal class WebSocketStockPriceService(
   private val client: OkHttpClient = OkHttpClient.Builder()
     .readTimeout(0, TimeUnit.MILLISECONDS)
@@ -217,6 +214,8 @@ internal class WebSocketStockPriceService(
     private const val RECONNECT_DELAY_MS = 1_000L
     private const val MIN_PRICE = 1.0
     private const val MAX_CHANGE_DELTA = 5.0
+    private const val MAX_RETRIES = 5
+    private const val RETRIES_BACKOFF = 1.1F
 
     private val DEFAULT_SYMBOLS = listOf(
       "AAPL", "GOOG", "MSFT", "AMZN", "TSLA",
