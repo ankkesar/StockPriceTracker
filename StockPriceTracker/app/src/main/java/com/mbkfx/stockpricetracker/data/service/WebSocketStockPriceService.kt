@@ -1,17 +1,14 @@
 package com.mbkfx.stockpricetracker.data.service
 
 import android.util.Log
+import com.mbkfx.stockpricetracker.data.service.dto.StockPriceDto
 import com.mbkfx.stockpricetracker.data.service.exception.StockPriceServiceConnectionException
-import java.util.UUID
-import java.util.concurrent.TimeUnit
-import kotlin.random.Random
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.channels.BufferOverflow
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -30,7 +27,10 @@ import okio.IOException
 import org.json.JSONObject
 import java.net.SocketException
 import java.net.UnknownHostException
+import java.util.UUID
+import java.util.concurrent.TimeUnit
 import kotlin.math.pow
+import kotlin.random.Random
 
 internal class WebSocketStockPriceService(
   private val client: OkHttpClient = OkHttpClient.Builder()
@@ -54,16 +54,17 @@ internal class WebSocketStockPriceService(
   private var reconnectAttempt: Int = 1
   private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
   private val stockCache = initialPrices.associateBy { it.id }.toMutableMap()
-  private val _errors = MutableStateFlow<Throwable?>(null)
   private val supervisor = SupervisorJob()
   private var scope = CoroutineScope(ioDispatcher + supervisor)
   private var webSocket: WebSocket? = null
   private var sendJob: Job? = null
   private var reconnectJob: Job? = null
   private var started = false
+
+  private val _errors = MutableStateFlow<Throwable?>(null)
   private val _stockPriceStream = MutableSharedFlow<StockPriceDto>(
     replay = 1,
-    extraBufferCapacity = 100,
+    extraBufferCapacity = BUFFER,
     onBufferOverflow = BufferOverflow.DROP_OLDEST
   )
   override val errors = _errors.asStateFlow()
@@ -193,7 +194,6 @@ internal class WebSocketStockPriceService(
     }.getOrNull() ?: return
 
     scope.launch {
-//      stockPriceChannel.send(payload)
       _stockPriceStream.emit(payload)
     }
   }
@@ -216,6 +216,7 @@ internal class WebSocketStockPriceService(
     private const val MAX_CHANGE_DELTA = 5.0
     private const val MAX_RETRIES = 5
     private const val RETRIES_BACKOFF = 1.1F
+    private const val BUFFER = 100
 
     private val DEFAULT_SYMBOLS = listOf(
       "AAPL", "GOOG", "MSFT", "AMZN", "TSLA",

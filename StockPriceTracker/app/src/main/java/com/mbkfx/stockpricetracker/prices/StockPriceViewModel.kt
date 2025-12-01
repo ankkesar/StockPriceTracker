@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.mbkfx.stockpricetracker.di.StockPriceModule
 import com.mbkfx.stockpricetracker.domain.model.ConnectionStatus
 import com.mbkfx.stockpricetracker.domain.model.StockPriceState
-import com.mbkfx.stockpricetracker.domain.repository.StockPriceRepository
+import com.mbkfx.stockpricetracker.data.repository.StockPriceRepository
 import com.mbkfx.stockpricetracker.prices.model.StockPriceUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

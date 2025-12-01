@@ -1,7 +1,7 @@
 package com.mbkfx.stockpricetracker.data.repository
 
 import com.mbkfx.stockpricetracker.data.service.StockLogoService
-import com.mbkfx.stockpricetracker.data.service.StockPriceDto
+import com.mbkfx.stockpricetracker.data.service.dto.StockPriceDto
 import com.mbkfx.stockpricetracker.data.service.StockPriceService
 import com.mbkfx.stockpricetracker.data.service.StaticStockLogoService
 import com.mbkfx.stockpricetracker.domain.model.StockPriceState

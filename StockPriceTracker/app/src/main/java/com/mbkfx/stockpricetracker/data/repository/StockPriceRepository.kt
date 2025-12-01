@@ -1,6 +1,6 @@
-package com.mbkfx.stockpricetracker.domain.repository
+package com.mbkfx.stockpricetracker.data.repository
 
-import com.mbkfx.stockpricetracker.data.repository.StockImage
+import com.mbkfx.stockpricetracker.data.service.dto.StockImage
 import com.mbkfx.stockpricetracker.domain.model.StockPriceState
 import kotlinx.coroutines.flow.Flow
 

@@ -2,7 +2,7 @@ package com.mbkfx.stockpricetracker.prices
 
 import com.mbkfx.stockpricetracker.domain.model.ConnectionStatus
 import com.mbkfx.stockpricetracker.domain.model.StockPriceState
-import com.mbkfx.stockpricetracker.domain.repository.StockPriceRepository
+import com.mbkfx.stockpricetracker.data.repository.StockPriceRepository
 import com.mbkfx.stockpricetracker.prices.model.StockUiModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

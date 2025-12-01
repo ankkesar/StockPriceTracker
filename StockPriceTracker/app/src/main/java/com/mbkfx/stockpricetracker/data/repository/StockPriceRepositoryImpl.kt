@@ -2,14 +2,14 @@ package com.mbkfx.stockpricetracker.data.repository
 
 import com.mbkfx.stockpricetracker.data.service.StaticStockLogoService
 import com.mbkfx.stockpricetracker.data.service.StockLogoService
-import com.mbkfx.stockpricetracker.data.service.StockPriceDto
+import com.mbkfx.stockpricetracker.data.service.dto.StockPriceDto
 import com.mbkfx.stockpricetracker.data.service.StockPriceService
 import com.mbkfx.stockpricetracker.data.service.WebSocketStockPriceService
+import com.mbkfx.stockpricetracker.data.service.dto.StockImage
 import com.mbkfx.stockpricetracker.data.service.exception.StockPriceServiceClosedException
 import com.mbkfx.stockpricetracker.data.service.exception.StockPriceServiceConnectionException
 import com.mbkfx.stockpricetracker.domain.model.ConnectionStatus
 import com.mbkfx.stockpricetracker.domain.model.StockPriceState
-import com.mbkfx.stockpricetracker.domain.repository.StockPriceRepository
 import com.mbkfx.stockpricetracker.prices.model.StockUiModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

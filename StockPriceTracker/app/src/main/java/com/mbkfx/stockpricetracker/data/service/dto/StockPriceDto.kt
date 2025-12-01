@@ -1,4 +1,4 @@
-package com.mbkfx.stockpricetracker.data.service
+package com.mbkfx.stockpricetracker.data.service.dto
 
 import org.json.JSONObject
 
