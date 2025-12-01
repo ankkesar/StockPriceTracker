@@ -238,3 +238,4 @@ Unit tests are provided for:
 ### Known Issues
 - UI alignment
 - Occasionally need to press start/stop button twice
+- Mistakes in project structure
