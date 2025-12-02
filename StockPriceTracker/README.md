@@ -26,6 +26,7 @@ The application follows Clean Architecture with three main layers:
 - This data can be buffered with Stateflow and consumed as per device speed
 - Converting a cold flow into hot flow can share dataset, if UI is recreated
 - Using conflate to prevent ui jank
+- For battery optimisation Webservice can be initialised as per Market status config received from backend - Open, Closed, After Hours.
 
 ## Project Structure
 
@@ -132,7 +133,6 @@ Static implementation that returns deterministic logo URLs. Emulates static data
 #### `StockPriceRepositoryImpl` (class)
 Repository implementation that coordinates between service and domain.
 - Converts DTOs to domain models
-- Merges price updates with logo URLs
 - Handles error states
 - Maintains latest stock prices
 
@@ -202,7 +202,7 @@ Exception thrown when service is closed.
 - **Real-time Updates**: Receives live stock price updates via WebSocket
 - **25 Stock Symbols**: Tracks multiple stocks simultaneously
 - **Clean Architecture**: Separation of concerns with clear layer boundaries
-- **Error Handling**: Graceful error handling with retry mechanism
+- **Error Handling**: Graceful error handling with retry mechanism and backoff logic
 - **Logo Support**: Displays stock logos (via logo service)
 - **Fixed IDs**: Uses stable IDs that don't change when symbols change
 - **State Management**: Reactive state management with Kotlin Flow
